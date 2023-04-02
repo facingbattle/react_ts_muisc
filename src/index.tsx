@@ -1,19 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+// hash 路由
+import { HashRouter } from 'react-router-dom'
+
+// redux store
+import { Provider } from 'react-redux'
+
+// 重置 css 样式
+import 'normalize.css'
+import '@/assets/css/index.less'
+
+import App from '@/App'
+import store from '@/store'
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    // 使用 Provider 包裹提供 store
+    <Provider store={store}>
+        {/* 使用 HashRouter 包裹 App 组件 */}
+        <HashRouter>
+            <App />
+        </HashRouter>
+    </Provider>
+)
