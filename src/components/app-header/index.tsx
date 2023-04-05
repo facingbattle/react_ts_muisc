@@ -1,6 +1,9 @@
 import React, { memo, useState } from 'react'
 import type { FC, ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Input } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
+
 import { HeaderLeft, HeaderRight, HeaderWrapper } from './style'
 
 // 引入处理后的数据
@@ -52,7 +55,16 @@ const AppHeader: FC<IProps> = () => {
                         })}
                     </div>
                 </HeaderLeft>
-                <HeaderRight>right</HeaderRight>
+                <HeaderRight>
+                    {/* * 对于 react 来说, 这里可以完整的传一个组件进去 prefix={<SearchOutlined />} */}
+                    <Input
+                        className="search"
+                        placeholder="音乐/视频/电台/用户"
+                        prefix={<SearchOutlined />}
+                    />
+                    <span className="center">创作者中心</span>
+                    <span className="login">登录</span>
+                </HeaderRight>
             </div>
             <div className="divider"></div>
         </HeaderWrapper>
