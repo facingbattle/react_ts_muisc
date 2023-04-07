@@ -7,10 +7,13 @@ import {
 } from 'react-redux'
 
 import counterReducer from './modules/counter'
+import recommendReducer from '@/views/discover/c-views/recommend/store/recommend'
 
 const store = configureStore({
+    // 注册 reducer
     reducer: {
         counter: counterReducer,
+        recommend: recommendReducer,
     },
 })
 
