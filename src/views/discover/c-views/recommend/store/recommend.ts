@@ -7,8 +7,8 @@ export const fetchBannerDataAction = createAsyncThunk(
     'banners',
     async (arg, { getState }) => {
         const res = await getBanners()
-        console.log('-> res:', res)
-        return res.data
+        // 拿到数据直接返回
+        return res.banners
     }
 )
 
@@ -25,6 +25,21 @@ const recommendSlice = createSlice({
     name: 'recommend',
     initialState,
     reducers: {},
+    extraReducers: (builder) => {
+        // 这里是相当于有三种状态, pending, fulfilled, rejected
+        builder
+            // 当 fetchBannerDataAction 发起网络请求还没有结果的时候, 是处于 pending 状态
+            .addCase(fetchBannerDataAction.pending, (state, action) => {
+                console.log('fetchBannerDataAction pending')
+            })
+            .addCase(fetchBannerDataAction.fulfilled, (state, action) => {
+                state.banners = action.payload
+            })
+            // 当 fetchBannerDataAction 发起网络请求失败的时候, 是处于 rejected 状态
+            .addCase(fetchBannerDataAction.rejected, (state, action) => {
+                console.log('fetchBannerDataAction rejected')
+            })
+    },
 })
 
 export default recommendSlice.reducer
