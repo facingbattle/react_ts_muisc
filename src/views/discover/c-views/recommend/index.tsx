@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/store'
 import { fetchBannerDataAction } from '@/views/discover/c-views/recommend/store/recommend'
 
 import TopBanner from '@/views/discover/c-views/recommend/c-cpns/top-banner'
+import { RecommendWrapper } from '@/views/discover/c-views/recommend/style'
 
 interface IProps {
     children?: ReactNode
@@ -18,10 +19,13 @@ const Recommend: FC<IProps> = () => {
     })
 
     return (
-        <div>
+        <RecommendWrapper>
             <TopBanner></TopBanner>
-            Recommend
-        </div>
+            <div className="content wrap-v2">
+                <div className="left">left</div>
+                <div className="right">right</div>
+            </div>
+        </RecommendWrapper>
     )
 }
 
