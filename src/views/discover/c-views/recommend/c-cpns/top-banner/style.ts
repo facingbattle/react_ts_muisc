@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const BannerWrapper = styled.div`
+    //background: url('http://p1.music.126.net/RFvI7jQE8NPKwFq43G0lcw==/109951168532504164.jpg')
+    //    center center/6000px;
+
     .banner {
         height: 270px;
         display: flex;
