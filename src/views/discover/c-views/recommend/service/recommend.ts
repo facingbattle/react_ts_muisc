@@ -7,3 +7,13 @@ export function getBanners() {
         url: '/banner',
     })
 }
+
+// 获取推荐歌单
+export function getHotRecommend(limit = 30) {
+    return hyRequest.get({
+        url: '/personalized',
+        params: {
+            limit,
+        },
+    })
+}

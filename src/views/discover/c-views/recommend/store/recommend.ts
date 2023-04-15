@@ -1,6 +1,9 @@
 //,  发起请求, 获取数据
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getBanners } from '@/views/discover/c-views/recommend/service/recommend'
+import {
+    getBanners,
+    getHotRecommend,
+} from '@/views/discover/c-views/recommend/service/recommend'
 
 // 在 createAsyncThunk 里面发起异步请求
 export const fetchBannerDataAction = createAsyncThunk(
@@ -13,13 +16,23 @@ export const fetchBannerDataAction = createAsyncThunk(
     }
 )
 
+export const fetchHotRecommendAction = createAsyncThunk(
+    'hotRecommend',
+    async (arg, { getState, dispatch }) => {
+        const res = await getHotRecommend(8)
+        dispatch(changeHotRecommendsAction(res.result))
+    }
+)
+
 // 定义请求接口的数据类型
 interface IRecommendState {
     banners: any[]
+    hotRecommends: any[]
 }
 
 const initialState: IRecommendState = {
     banners: [],
+    hotRecommends: [],
 }
 
 const recommendSlice = createSlice({
@@ -30,7 +43,11 @@ const recommendSlice = createSlice({
         changeBannersAction(state, action) {
             state.banners = action.payload
         },
+        changeHotRecommendsAction(state, action) {
+            state.hotRecommends = action.payload
+        },
     },
+
     // , 处理数据方式 1: redux 官方提供处理数据的方式 (麻烦)
     // extraReducers: (builder) => {
     //     // 这里是相当于有三种状态, pending, fulfilled, rejected
@@ -50,5 +67,6 @@ const recommendSlice = createSlice({
 })
 
 // 导出 actions
-export const { changeBannersAction } = recommendSlice.actions
+export const { changeBannersAction, changeHotRecommendsAction } =
+    recommendSlice.actions
 export default recommendSlice.reducer
