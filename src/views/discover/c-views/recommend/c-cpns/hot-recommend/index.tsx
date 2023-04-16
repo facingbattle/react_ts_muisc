@@ -11,7 +11,7 @@ interface IProps {
 
 const HotRecommend: FC<IProps> = () => {
     // 从 state 中拿数据
-    const { hotRecommends } = useAppSelector((state) => {
+    const { hotRecommends = [] } = useAppSelector((state) => {
         return {
             hotRecommends: state.recommend.hotRecommends,
         }
