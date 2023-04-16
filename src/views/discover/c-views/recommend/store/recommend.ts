@@ -26,7 +26,7 @@ export const fetchHotRecommendAction = createAsyncThunk(
 )
 
 export const fetchNewAlbumAction = createAsyncThunk(
-    'newAlbum',
+    'newAlbums',
     async (arg, { getState, dispatch }) => {
         const res = await getNewAlbum()
         dispatch(changeNewAlbumsAction(res.albums))
@@ -37,13 +37,13 @@ export const fetchNewAlbumAction = createAsyncThunk(
 interface IRecommendState {
     banners: any[]
     hotRecommends: any[]
-    newAlbum: any[]
+    newAlbums: any[]
 }
 
 const initialState: IRecommendState = {
     banners: [],
     hotRecommends: [],
-    newAlbum: [],
+    newAlbums: [],
 }
 
 const recommendSlice = createSlice({
@@ -58,7 +58,7 @@ const recommendSlice = createSlice({
             state.hotRecommends = action.payload
         },
         changeNewAlbumsAction(state, action) {
-            state.newAlbum = action.payload
+            state.newAlbums = action.payload
         },
     },
 
