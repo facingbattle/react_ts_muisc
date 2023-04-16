@@ -15,8 +15,7 @@ const NewAlbum: FC<IProps> = () => {
             {/* 轮播图 */}
             <div className="content">
                 <button className="sprite_02 arrow arrow-left"></button>
-                <div className="banner">
-                </div>
+                <div className="banner"></div>
                 <button className="sprite_02 arrow arrow-right"></button>
             </div>
         </AlbumWrapper>
