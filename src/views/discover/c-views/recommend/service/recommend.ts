@@ -17,3 +17,10 @@ export function getHotRecommend(limit = 30) {
         },
     })
 }
+
+// 获取 新碟上架 的轮播图数据
+export function getNewAlbum() {
+    return hyRequest.get({
+        url: '/album/newest',
+    })
+}

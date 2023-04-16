@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/store'
 import {
     fetchBannerDataAction,
     fetchHotRecommendAction,
+    fetchNewAlbumAction,
 } from '@/views/discover/c-views/recommend/store/recommend'
 
 import TopBanner from '@/views/discover/c-views/recommend/c-cpns/top-banner'
@@ -22,6 +23,7 @@ const Recommend: FC<IProps> = () => {
     useEffect(() => {
         dispatch(fetchBannerDataAction())
         dispatch(fetchHotRecommendAction())
+        dispatch(fetchNewAlbumAction())
     })
 
     return (

@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
     getBanners,
     getHotRecommend,
+    getNewAlbum,
 } from '@/views/discover/c-views/recommend/service/recommend'
 
 // 在 createAsyncThunk 里面发起异步请求
@@ -24,15 +25,25 @@ export const fetchHotRecommendAction = createAsyncThunk(
     }
 )
 
+export const fetchNewAlbumAction = createAsyncThunk(
+    'newAlbum',
+    async (arg, { getState, dispatch }) => {
+        const res = await getNewAlbum()
+        dispatch(changeNewAlbumsAction(res.albums))
+    }
+)
+
 // 定义请求接口的数据类型
 interface IRecommendState {
     banners: any[]
     hotRecommends: any[]
+    newAlbum: any[]
 }
 
 const initialState: IRecommendState = {
     banners: [],
     hotRecommends: [],
+    newAlbum: [],
 }
 
 const recommendSlice = createSlice({
@@ -45,6 +56,9 @@ const recommendSlice = createSlice({
         },
         changeHotRecommendsAction(state, action) {
             state.hotRecommends = action.payload
+        },
+        changeNewAlbumsAction(state, action) {
+            state.newAlbum = action.payload
         },
     },
 
@@ -67,6 +81,9 @@ const recommendSlice = createSlice({
 })
 
 // 导出 actions
-export const { changeBannersAction, changeHotRecommendsAction } =
-    recommendSlice.actions
+export const {
+    changeBannersAction,
+    changeHotRecommendsAction,
+    changeNewAlbumsAction,
+} = recommendSlice.actions
 export default recommendSlice.reducer
