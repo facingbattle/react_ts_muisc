@@ -4,6 +4,7 @@ import { AlbumWrapper } from '@/views/discover/c-views/recommend/c-cpns/new-albu
 import AreaHeaderV1 from '@/components/area-header-v1'
 import { Carousel } from 'antd'
 import { useAppSelector } from '@/store'
+import NewAlbumItem from '@/components/new-album-item'
 
 interface IProps {
     children?: ReactNode
@@ -41,16 +42,19 @@ const NewAlbum: FC<IProps> = () => {
                     <Carousel ref={bannerRef} dots={false} speed={1500}>
                         {[0, 1].map((item, index) => {
                             return (
-                                <div className="album-list" key={item}>
-                                    {newAlbums
-                                        .slice(item * 5, (item + 1) * 5)
-                                        .map((album) => {
-                                            return (
-                                                <div key={album.name}>
-                                                    {album.name}
-                                                </div>
-                                            )
-                                        })}
+                                <div key={item}>
+                                    <div className="album-list">
+                                        {newAlbums
+                                            .slice(item * 5, (item + 1) * 5)
+                                            .map((album) => {
+                                                return (
+                                                    <NewAlbumItem
+                                                        itemData={album}
+                                                        key={album.id}
+                                                    />
+                                                )
+                                            })}
+                                    </div>
                                 </div>
                             )
                         })}
