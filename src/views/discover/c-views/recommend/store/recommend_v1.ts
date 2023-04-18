@@ -6,52 +6,32 @@ import {
     getNewAlbum,
 } from '@/views/discover/c-views/recommend/service/recommend'
 
-// 如果不同的 action 要传递不同的参数, 就不建议把请求放到一个函数里处理了
-// 分开的话可以更方便的传递 action 的参数
-// 这里统一放到一个函数里处理, 使用 Promise 异步的方式发送三个请求, 而且这三个请求可以说是独立的, 而且没什么额外的请求参数
-export const fetchRecommendDataAction = createAsyncThunk(
-    'fetchData',
-    (_, { dispatch }) => {
-        // 这里面不使用 await 的方式
-        // 使用 Promise 的方式发送异步请求, 避免使用 await 造成阻塞
-        getBanners().then((res) => {
-            dispatch(changeBannersAction(res.banners))
-        })
-        getHotRecommend(8).then((res) => {
-            dispatch(changeHotRecommendsAction(res.result))
-        })
-        getNewAlbum().then((res) => {
-            dispatch(changeNewAlbumsAction(res.albums))
-        })
+// 在 createAsyncThunk 里面发起异步请求
+export const fetchBannerDataAction = createAsyncThunk(
+    'banners',
+    async (arg, { getState, dispatch }) => {
+        const res = await getBanners()
+        // 拿到数据直接返回
+        // return res.banners
+        dispatch(changeBannersAction(res.banners))
     }
 )
 
-// 在 createAsyncThunk 里面发起异步请求
-// export const fetchBannerDataAction = createAsyncThunk(
-//     'banners',
-//     async (arg, { getState, dispatch }) => {
-//         const res = await getBanners()
-//         // 拿到数据直接返回
-//         // return res.banners
-//         dispatch(changeBannersAction(res.banners))
-//     }
-// )
-//
-// export const fetchHotRecommendAction = createAsyncThunk(
-//     'hotRecommend',
-//     async (arg, { getState, dispatch }) => {
-//         const res = await getHotRecommend(8)
-//         dispatch(changeHotRecommendsAction(res.result))
-//     }
-// )
-//
-// export const fetchNewAlbumAction = createAsyncThunk(
-//     'newAlbums',
-//     async (arg, { getState, dispatch }) => {
-//         const res = await getNewAlbum()
-//         dispatch(changeNewAlbumsAction(res.albums))
-//     }
-// )
+export const fetchHotRecommendAction = createAsyncThunk(
+    'hotRecommend',
+    async (arg, { getState, dispatch }) => {
+        const res = await getHotRecommend(8)
+        dispatch(changeHotRecommendsAction(res.result))
+    }
+)
+
+export const fetchNewAlbumAction = createAsyncThunk(
+    'newAlbums',
+    async (arg, { getState, dispatch }) => {
+        const res = await getNewAlbum()
+        dispatch(changeNewAlbumsAction(res.albums))
+    }
+)
 
 // 定义请求接口的数据类型
 interface IRecommendState {
