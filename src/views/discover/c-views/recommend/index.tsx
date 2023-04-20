@@ -13,6 +13,7 @@ import TopBanner from '@/views/discover/c-views/recommend/c-cpns/top-banner'
 import { RecommendWrapper } from '@/views/discover/c-views/recommend/style'
 import HotRecommend from '@/views/discover/c-views/recommend/c-cpns/hot-recommend'
 import NewAlbum from '@/views/discover/c-views/recommend/c-cpns/new-album'
+import TopRanking from '@/views/discover/c-views/recommend/c-cpns/top-ranking'
 
 interface IProps {
     children?: ReactNode
@@ -37,6 +38,8 @@ const Recommend: FC<IProps> = () => {
                     <HotRecommend />
                     {/* 新碟上架 */}
                     <NewAlbum />
+                    {/* 榜单 */}
+                    <TopRanking />
                 </div>
                 <div className="right">right</div>
             </div>
