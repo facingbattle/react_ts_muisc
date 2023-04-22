@@ -24,3 +24,13 @@ export function getNewAlbum() {
         url: '/album/newest',
     })
 }
+
+// 获取榜单数据
+export function getPlaylistDetail(id: number) {
+    return hyRequest.get({
+        url: '/playlist/detail',
+        params: {
+            id,
+        },
+    })
+}

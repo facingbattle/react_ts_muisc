@@ -3,6 +3,7 @@ import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import { useAppDispatch } from '@/store'
 import {
+    fetchRankingDataAction,
     fetchRecommendDataAction,
     // fetchBannerDataAction,
     // fetchHotRecommendAction,
@@ -26,7 +27,10 @@ const Recommend: FC<IProps> = () => {
         // dispatch(fetchBannerDataAction())
         // dispatch(fetchHotRecommendAction())
         // dispatch(fetchNewAlbumAction())
+
+        // 合并请求
         dispatch(fetchRecommendDataAction())
+        dispatch(fetchRankingDataAction())
     })
 
     return (

@@ -4,6 +4,7 @@ import {
     getBanners,
     getHotRecommend,
     getNewAlbum,
+    getPlaylistDetail,
 } from '@/views/discover/c-views/recommend/service/recommend'
 
 // 如果不同的 action 要传递不同的参数, 就不建议把请求放到一个函数里处理了
@@ -53,17 +54,52 @@ export const fetchRecommendDataAction = createAsyncThunk(
 //     }
 // )
 
+const rankingIds = [
+    // 飙升榜
+    19723756,
+    // 新歌榜
+    3779629,
+    // 原创榜
+    2884035,
+]
+export const fetchRankingDataAction = createAsyncThunk(
+    'rankingData',
+    (_, { dispatch }) => {
+        // 获取绑定的数据, 这里的请求数据使用数组的方式组织一下
+        // * 方式 1: 每个请求单独处理
+        // for (const id of rankingIds) {
+        //     getPlaylistDetail(id).then((res) => {
+        //         // if-else
+        //     })
+        // }
+
+        // * 方式 2: 将三个结果都拿到, 统一放到一个数组中管理
+        // 先得到每个请求的 Pormise 对象, 然后使用 Promise.all() 方法
+        const promises: Promise<any>[] = rankingIds.map((id) =>
+            getPlaylistDetail(id)
+        )
+        // 保障 1: 获取的所有结果后, 进行 dispatch 操作
+        // 保障 2: 获取到的结果一定要保证正确的顺序
+        Promise.all(promises).then((res) => {
+            const playlists = res.map((item) => item.playlist)
+            dispatch(changeRankingAction(playlists))
+        })
+    }
+)
+
 // 定义请求接口的数据类型
 interface IRecommendState {
     banners: any[]
     hotRecommends: any[]
     newAlbums: any[]
+    ranking: any[]
 }
 
 const initialState: IRecommendState = {
     banners: [],
     hotRecommends: [],
     newAlbums: [],
+    ranking: [],
 }
 
 const recommendSlice = createSlice({
@@ -79,6 +115,9 @@ const recommendSlice = createSlice({
         },
         changeNewAlbumsAction(state, action) {
             state.newAlbums = action.payload
+        },
+        changeRankingAction(state, action) {
+            state.ranking = action.payload
         },
     },
 
@@ -105,5 +144,6 @@ export const {
     changeBannersAction,
     changeHotRecommendsAction,
     changeNewAlbumsAction,
+    changeRankingAction,
 } = recommendSlice.actions
 export default recommendSlice.reducer
