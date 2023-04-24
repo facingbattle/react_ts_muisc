@@ -15,6 +15,7 @@ import { RecommendWrapper } from '@/views/discover/c-views/recommend/style'
 import HotRecommend from '@/views/discover/c-views/recommend/c-cpns/hot-recommend'
 import NewAlbum from '@/views/discover/c-views/recommend/c-cpns/new-album'
 import TopRanking from '@/views/discover/c-views/recommend/c-cpns/top-ranking'
+import UserLogin from '@/views/discover/c-views/recommend/c-cpns/user-login'
 
 interface IProps {
     children?: ReactNode
@@ -45,7 +46,11 @@ const Recommend: FC<IProps> = () => {
                     {/* 榜单 */}
                     <TopRanking />
                 </div>
-                <div className="right">right</div>
+                <div className="right">
+                    <UserLogin />
+                    <div>入驻歌手</div>
+                    <div>热门主播</div>
+                </div>
             </div>
         </RecommendWrapper>
     )
