@@ -16,6 +16,8 @@ import HotRecommend from '@/views/discover/c-views/recommend/c-cpns/hot-recommen
 import NewAlbum from '@/views/discover/c-views/recommend/c-cpns/new-album'
 import TopRanking from '@/views/discover/c-views/recommend/c-cpns/top-ranking'
 import UserLogin from '@/views/discover/c-views/recommend/c-cpns/user-login'
+import SettleSinger from '@/views/discover/c-views/recommend/c-cpns/settle-singer'
+import HotAnchor from '@/views/discover/c-views/recommend/c-cpns/hot-anchor'
 
 interface IProps {
     children?: ReactNode
@@ -48,8 +50,8 @@ const Recommend: FC<IProps> = () => {
                 </div>
                 <div className="right">
                     <UserLogin />
-                    <div>入驻歌手</div>
-                    <div>热门主播</div>
+                    <SettleSinger />
+                    <HotAnchor />
                 </div>
             </div>
         </RecommendWrapper>
